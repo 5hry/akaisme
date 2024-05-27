@@ -15,7 +15,8 @@ variables:
   imageRepository: 'hryakaisme'
   containerRegistry: 'sangacr.azurecr.io'
   dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
+  uniqueTag: '$(Build.BuildId)'  # Sử dụng Build ID làm tag duy nhất cho image
+  latestTag: 'latest'  # Sử dụng tag "latest" cho việc triển khai
   imagePullSecret: 'sangacr1778449b-auth'
 
   # Agent VM image name
@@ -39,7 +40,8 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)
+          $(uniqueTag)
+          $(latestTag)
 
     - upload: manifests
       artifact: manifests
