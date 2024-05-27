@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: hryakaisme 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hryakaisme
+  template:
+    metadata:
+      labels:
+        app: hryakaisme 
+    spec:
+      containers:
+        - name: hryakaisme 
+          image: sangacr.azurecr.io/hryakaisme
+          ports:
+          - containerPort: 3000
